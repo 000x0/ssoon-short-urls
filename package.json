@@ -1,10 +1,18 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "airtable-netlify-short-urls",
+  "version": "1.0.0",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "URL shortener with an airtable backend",
+  "author": "Cristian Moreno <khriztianmoreno@gmail.com> (http://khriztianmoreno.dev/)",
+  "main": "index.js",
   "dependencies": {
+    "@emotion/core": "^10.0.17",
+    "@emotion/styled": "^10.0.17",
+    "airtable": "^0.7.1",
+    "axios": "^0.19.0",
+    "babel-plugin-emotion": "^10.0.17",
+    "dotenv": "^8.1.0",
+    "emotion-theming": "^10.0.17",
     "gatsby": "^2.13.73",
     "gatsby-image": "^2.2.10",
     "gatsby-plugin-manifest": "^2.2.6",
@@ -16,28 +24,31 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "react-particles-js": "^2.7.0"
   },
   "devDependencies": {
     "prettier": "^1.18.2"
   },
   "keywords": [
-    "gatsby"
+    "gatsby",
+    "netlify",
+    "netlify-functions",
+    "airtable"
   ],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
+    "clean": "rm -rf .cache && rm -rf ./public",
+    "develop": "node --max_old_space_size=4096 ./node_modules/.bin/gatsby develop --host 0.0.0.0 --port 8000",
+    "start": "yarn clean && npm run develop",
+    "serve": "gatsby serve"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/khriztianmoreno/ssoon-short-urls"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/khriztianmoreno/ssoon-short-urls/issues"
   }
 }
