@@ -27,12 +27,12 @@ function SEO({
 
   return (
     <Helmet
-      htmlAttributes={{
+      htmlAttributes={ {
         lang,
-      }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
+      } }
+      title={ title }
+      titleTemplate={ `%s | ${site.siteMetadata.title}` }
+      meta={ [
         {
           name: 'description',
           content: metaDescription,
@@ -65,11 +65,11 @@ function SEO({
           name: 'twitter:description',
           content: metaDescription,
         },
-      ].concat(meta)}
-      link={[
+      ].concat(meta) }
+      link={ [
         { href: '//fonts.googleapis.com/css?family=Open+Sans:400,600,700', rel: 'stylesheet' },
         { href: '//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700', rel: 'stylesheet' },
-      ]}
+      ] }
     />
   );
 }

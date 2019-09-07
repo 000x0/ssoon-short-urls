@@ -60,7 +60,7 @@ const SubTitle = styled.h2`
 const PARTICLES_PARAMS = {
   particles: {
     number: {
-      value: 200,
+      value: 100,
     },
     size: {
       value: 3,
@@ -79,7 +79,7 @@ const PARTICLES_PARAMS = {
 const Hero = () => (
   <Section>
     <ParticlesContainer>
-      <Particles params={PARTICLES_PARAMS} height="2062" />
+      <Particles params={ PARTICLES_PARAMS } />
     </ParticlesContainer>
     <Slider>
       <div className="container">
@@ -98,11 +98,3 @@ const Hero = () => (
 );
 
 export default Hero;
-
-
-/* <Section className="container">
-    <ParticleField config={CONFIG_PARTICLES} />
-    <div className="row">
-      <Content />
-    </div>
-  </Section> */

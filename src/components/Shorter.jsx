@@ -1,53 +1,25 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
+import FormShorten from './FormShorten';
+
 const Form = styled.form`
   position: relative;
   display: inline-block;
   width: 100%;
   letter-spacing: -1px;
 `;
-const Input = styled.input`
-  color: ${(props) => props.theme.colors.prussianBlue};
-  font-size: 1em;
-  float: left;
-  width: 100%;
-  height: 60px;
-  border: ${(props) => `1px ${props.theme.border.iron}`};
-  border-radius: 8px;
-  padding: 0 110px 0 20px;
-  box-shadow: 0 0 1px 0 rgba(0,0,0,0);
-  transition: all .25s ease-out;
-`;
-const Button = styled.button`
-  position: absolute;
-  top: 50%;
-  margin-top: -30px;
-  right: 0;
-  width: 150px;
-  height: 60px;
-  font-size: 1em;
-  color: ${(props) => props.theme.colors.white};
-  text-transform: lowercase;
-  cursor: pointer;
-  box-shadow: none;
-  border: none;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 0 20px;
-  background: ${(props) => (props.isCopy
-    ? props.theme.colors.shamrock : props.theme.colors.azureRadiance)};
-  outline: 0;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.shamrock};
-  }
-`;
 const Disclaimer = styled.p`
   color: ${(props) => props.theme.colors.white};
   font-size: 12px;
   margin: 8px 0 0 0;
   text-align: center;
+  height: 25px;
+
+  button {
+    padding: 10px 30px;
+    background-color: ${(props) => props.theme.colors.shamrock};
+  }
 `;
 
 const API = process.env.GATSBY_SHORTEN_ENDPOINT;
@@ -87,47 +59,41 @@ const Shorter = () => {
 
   return (
     <>
-      <Form onSubmit={submit}>
+      <Form
+        onSubmit={ submit }
+        key={ callback.success ? Date.now() : 'copied' }
+      >
         {
           !callback.success
             ? (
-              <>
-                <Input
-                  id="link"
-                  type="url"
-                  placeholder="Paste long url and shorten it"
-                  name="url"
-                  onChange={({ target }) => { setLongUrl(target.value); }}
-                  initialValue={longUrl}
-                  required
-                />
-                <Button type="submit">Shorten</Button>
-              </>
+              <FormShorten
+                setLongUrl={ setLongUrl }
+                init
+              />
             )
             : (
-              <>
-                <Input
-                  id="link"
-                  type="text"
-                  name="shortUrl"
-                  value={callback.url}
-                  initialValue={callback.url}
-                  disabled
-                />
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setCallback({ url: '', success: false, error: false });
-                  }}
-                  isCopy
-                >
-                  Copy
-                </Button>
-              </>
+              <FormShorten
+                url={ callback.url }
+              />
             )
         }
       </Form>
-      <Disclaimer>This is a service developed academically.</Disclaimer>
+      {
+        !callback.success
+          ? <Disclaimer>This is a service developed academically.</Disclaimer>
+          : (
+            <Disclaimer>
+              <button
+                type="button"
+                onClick={ () => {
+                  setCallback({ url: '', success: false, error: false });
+                } }
+              >
+                New Shorten
+              </button>
+            </Disclaimer>
+          )
+      }
     </>
   );
 };

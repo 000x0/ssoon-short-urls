@@ -7,7 +7,7 @@ import Header from './Header';
 import './layout.css';
 
 const Layout = ({ children }) => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider theme={ theme }>
     <Header />
     <main>{children}</main>
   </ThemeProvider>
